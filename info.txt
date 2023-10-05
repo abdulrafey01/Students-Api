@@ -1,0 +1,25 @@
+uid
+name
+email address
+phone number
+course id
+qualification
+
+{
+Passing Year 
+Principle
+School
+}
+
+Enrollment Type
+ -> On-site
+ -> Remote
+ Status 
+  ->None
+  -> Admission
+  -> Student
+  ->Alumni
+
+Date/Time
+
+Profile Image
