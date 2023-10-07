@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const studentSchema = new mongoose.Schema({
     studentId: {
         type: String,
-        required: true
+        default:Date.now,
     },
     name: {
         firstName: {
@@ -21,7 +21,6 @@ const studentSchema = new mongoose.Schema({
     },
     cnic: {
         type: String,
-        required: true
     },
     gender: {
         type: String,
@@ -80,7 +79,6 @@ const studentSchema = new mongoose.Schema({
     },
     date: {
         type: Date,
-        default: Date.now
     }
 })
 

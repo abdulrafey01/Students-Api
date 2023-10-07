@@ -9,7 +9,7 @@ exports.create = async (req, res)=> {
     const existingStudent = await Student.findOne({email});
 
     if (existingStudent) {
-      return res.status(409).json({ message: 'Student already exists' });
+      return res.status(409).json({ error: 'Student already exists' });
     }
 
     const newStudent = new Student({

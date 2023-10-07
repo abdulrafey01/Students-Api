@@ -1,0 +1,36 @@
+name: Node.js CI/CD to cPanel
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Deploy to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ftp.hivetechnologies.org
+          username: tutorserverdeploy@tutorserver.hivetechnologies.io
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+
+      - name: Start Server
+        run:  node server.js
+
+    env:
+      MONGO_URL: ${{ secrets.MONGO_URI }}

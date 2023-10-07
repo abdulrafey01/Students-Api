@@ -1,12 +1,6 @@
 const { check } = require('express-validator');
 
 exports.studentValidators = [
-  check('studentId')
-    .notEmpty()
-    .withMessage('Student Id is required')
-    .isString()
-    .withMessage('Student Id must be a string'),
-
   check('name.firstName')
     .notEmpty()
     .withMessage('First name is required')
@@ -24,12 +18,6 @@ exports.studentValidators = [
     .withMessage('Email is required')
     .isEmail()
     .withMessage('Invalid email address'),
-
-  check('cnic')
-    .notEmpty()
-    .withMessage('CNIC is required')
-    .isString()
-    .withMessage('CNIC must be a string'),
 
   check('gender')
     .notEmpty()

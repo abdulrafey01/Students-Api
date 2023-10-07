@@ -12,11 +12,15 @@ app.use(cors())
 connectToMongoose()
 
 app.get("/", (req, res) => {
-    res.send("Hello World")
+    res.send("Hello World. Student Api is Running")
 })
 
 app.use('/student', require('./routes/studentRoutes'))
 
 app.listen(5000, () => {
-    console.log("Server is listening on port 5000")
+    console.log("Server is listening")
 })
+
+// app.listen(()=>{
+//     console.log("Server Is Running")
+// })
