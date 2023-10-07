@@ -28,6 +28,3 @@ jobs:
           username: tutorserverdeploy@tutorserver.hivetechnologies.io
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./
-
-      - name: Start Server
-        run:  node server.js
