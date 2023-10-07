@@ -31,6 +31,3 @@ jobs:
 
       - name: Start Server
         run:  node server.js
-
-    env:
-      MONGO_URL: ${{ secrets.MONGO_URI }}
