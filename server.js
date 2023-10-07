@@ -12,7 +12,7 @@ app.use(cors())
 connectToMongoose()
 
 app.get("/", (req, res) => {
-    res.send("Hello World. Student Api is Running")
+    res.send("Hello World. Student Api Here")
 })
 
 app.use('/student', require('./routes/studentRoutes'))
