@@ -26,7 +26,6 @@ app.use('/auth', require('./routes/userRoutes'))
 // Blog Routes
 app.use('/blog', require('./routes/blogRoutes'))
 
-app.listen(5000, () => {
+app.listen(() => {
     console.log("Server is Running")
 })
-2
