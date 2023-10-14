@@ -7,7 +7,7 @@ exports.studentValidators = [
     .isString()
     .withMessage('First name must be a string'),
 
-  check('name.lastName')
+  check('name.lastName') 
     .notEmpty()
     .withMessage('Last name is required')
     .isString()
@@ -58,8 +58,7 @@ exports.studentValidators = [
   check('address.country')
     .notEmpty()
     .withMessage('Country is required')
-    .isString()
-  
+    .isString()  
     .withMessage('Country must be a string'),
 
   check('qualification.passingYear')

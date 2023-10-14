@@ -1,6 +1,7 @@
+const User = require("../models/User");
 const Student = require("../models/Student")
 
-
+ 
 // For Creating Student
 exports.create = async (req, res)=> {
  try {
@@ -9,7 +10,7 @@ exports.create = async (req, res)=> {
     const existingStudent = await Student.findOne({email});
 
     if (existingStudent) {
-      return res.status(409).json({ error: 'Student already exists' });
+      return res.status(409).json({ error: 'Student With Same Email Already Exists' });
     }
 
     const newStudent = new Student({
@@ -27,12 +28,20 @@ exports.create = async (req, res)=> {
 
    await newStudent.save()
 
+   //add student_id in User Model
+   const authUser = await User.findOne({email})
+
+   if(authUser){
+       authUser.student_id = newStudent._id
+       await authUser.save()
+   }
+   
     res.status(201).json({
-      newStudent
+      message: `Student ${newStudent.name.firstName} Registered Successfully`,
     })
 
  } catch (error) {
-    res.status(401).json({
+    res.status(500).json({
         error:"Unable To Create Student"
     })
  }
@@ -47,7 +56,7 @@ exports.fetchAll = async (req, res)=> {
             students
         })
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             error:"Unable To Fetch Students"
         })
     }
@@ -70,7 +79,7 @@ exports.fetchOne = async (req, res)=> {
             student
         })
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             error:"Unable To Fetch Student"
         })
     }
@@ -84,7 +93,7 @@ exports.remove = async (req, res)=> {
 
         if(!student){
            return res.status(404).json({
-                error:"Student With That ID Not Found"
+                error:"Student With That ID Does Not Exist"
             })
         }
 
@@ -94,8 +103,68 @@ exports.remove = async (req, res)=> {
         })
 
     } catch (error) {
-        res.status(401).json({
+        res.status(500).json({
             error:"Unable To Delete Student"
         })
+    }
+}
+
+
+// For Updating Student
+exports.update = async (req, res)=> {
+    try {
+        const {id} = req.params
+        const {studentId, name, email, cnic, gender, phone, address, course, qualification, enrollmentType} = req.body
+
+        const updatedStudent ={}
+        if(studentId){
+            updatedStudent.studentId = studentId
+        }
+        if(name){
+            updatedStudent.name = name
+        }
+        if(email){
+            updatedStudent.email = email
+        }
+        if(cnic){
+            updatedStudent.cnic = cnic
+        }
+        if(gender){
+            updatedStudent.gender = gender
+        }
+        if(phone){
+            updatedStudent.phone = phone
+        }
+        if(address){
+            updatedStudent.address = address
+        }
+        if(course){
+            updatedStudent.course = course
+        }
+        if(qualification){
+            updatedStudent.qualification = qualification
+        }
+        if(enrollmentType){
+            updatedStudent.enrollmentType = enrollmentType
+        }
+
+        const updated = await Student.findByIdAndUpdate({_id:id},{$set:updatedStudent},{new:true})
+         
+        if(!updated){
+            return res.status(404).json({
+                error:"Student With That ID Does Not Exist"
+            })
+        }
+
+        res.status(200).json({
+            message:"Student Updated Successfully",
+        })
+        
+    } catch (error) {
+
+        res.status(500).json({
+            error:"Unable To Update Student"
+        }) 
+
     }
 }

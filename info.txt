@@ -23,3 +23,19 @@ Enrollment Type
 Date/Time
 
 Profile Image
+
+
+
+
+//Blog Schema
+
+title
+content
+author
+date
+feature_image
+tags
+permaLink
+Category
+Subcategory
+

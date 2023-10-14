@@ -8,19 +8,25 @@ dotenv.config()
 app.use(express.json())
 app.use(cors())
 
-
 connectToMongoose()
 
 app.get("/", (req, res) => {
     res.send("Student Api Here")
 })
 
+// Student Routes
 app.use('/student', require('./routes/studentRoutes'))
 
-app.listen(5000, () => {
-    console.log("Server is listening")
-})
+// Course Routes
+app.use('/course', require('./routes/courseRoutes'))
 
-// app.listen(()=>{
-//     console.log("Server Is Running")
-// })
+//Auth Routes
+app.use('/auth', require('./routes/userRoutes'))
+
+// Blog Routes
+app.use('/blog', require('./routes/blogRoutes'))
+
+app.listen(5000, () => {
+    console.log("Server is Running")
+})
+2

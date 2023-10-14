@@ -4,6 +4,7 @@ const studentSchema = new mongoose.Schema({
     studentId: {
         type: String,
         default:Date.now,
+        unique: true
     },
     name: {
         firstName: {
@@ -49,8 +50,8 @@ const studentSchema = new mongoose.Schema({
         }
     },
     course: {
-        type: String,
-        required: true
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "Course",
     },
     qualification: {
         passingYear: {
@@ -74,8 +75,8 @@ const studentSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true,
-        enum: ["Admission", "Student", "Alumni"],
-        default: "Admission"
+        enum: ["None", "Admission", "Student", "Alumni"],
+        default: "None"
     },
     date: {
         type: Date,
