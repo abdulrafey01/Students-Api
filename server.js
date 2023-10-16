@@ -26,6 +26,6 @@ app.get("/", (req, res) => {
 // Blog Routes
 // app.use('/blog', require('./routes/blogRoutes'))
 
-app.listen(() => {
+app.listen(5000, () => {
     console.log("Server is Running")
 })
