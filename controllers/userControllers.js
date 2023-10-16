@@ -17,7 +17,7 @@ exports.signup = async (req, res) => {
         })
     }
 
-    const token = jwt.sign({ name, email, password }, process.env.JWT_SECRET, { expiresIn: "1h" })
+    const token = jwt.sign({ name, email, password }, "tutorincjwtsecret", { expiresIn: "1h" })
 
     const emailData = {
         from: "TutorInc",
@@ -44,7 +44,7 @@ exports.activateAccount = async (req, res) => {
 
     try {
 
-        jwt.verify(token, process.env.JWT_SECRET) 
+        jwt.verify(token, "tutorincjwtsecret") 
         const { name, email, password } = jwt.decode(token)
 
         //hash password
@@ -99,7 +99,7 @@ exports.signin = async (req, res) => {
             id: existingUser._id,
         }
 
-        const authToken = jwt.sign(data, process.env.JWT_SECRET)
+        const authToken = jwt.sign(data, "tutorincjwtsecret")
 
         return res.status(200).json({
             authToken
@@ -131,7 +131,7 @@ exports.googleLogin = async (req, res) => {
                 id: existingUser._id,
             }
     
-            const authToken = jwt.sign(data, process.env.JWT_SECRET)
+            const authToken = jwt.sign(data, "tutorincjwtsecret")
     
             return res.status(200).json({
                 authToken
@@ -146,7 +146,7 @@ exports.googleLogin = async (req, res) => {
             }
 
             // Generate Auth Token
-            const authToken = jwt.sign(data, process.env.JWT_SECRET)
+            const authToken = jwt.sign(data, "tutorincjwtsecret")
 
             return res.status(200).json({
                 authToken
