@@ -27,5 +27,5 @@ app.use("/blog", require("./routes/blogRoutes"));
 // Contact Us Routes
 app.use("/contact", require("./routes/contactRoutes"));
 app.listen(5000, () => {
-  console.log("Server is Running");
+  console.log("Server is Running now");
 });
