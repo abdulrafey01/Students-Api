@@ -39,3 +39,17 @@ exports.create = async (req, res) => {
     });
   }
 };
+
+// For fetching all contact messages
+exports.fetchAll = async (req, res) => {
+  try {
+    const messages = await Contact.find();
+    res.send({
+      messages,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: "Unable to fetch contacts",
+    });
+  }
+};
