@@ -1,12 +1,15 @@
 const express = require("express");
 const connectToMongoose = require("./config/db");
 const cors = require("cors");
+const requestLogMiddleware = require("./middlewares/requestLogMiddleware");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 connectToMongoose();
+
+app.use(requestLogMiddleware(app));
 
 app.get("/", (req, res) => {
   res.send("Student Api Here");
@@ -27,6 +30,9 @@ app.use("/blog", require("./routes/blogRoutes"));
 // Contact Us Routes
 app.use("/contact", require("./routes/contactRoutes"));
 
-app.listen(process.env.PORT, 5000, () => {
+// Request Logs Routes
+app.use("/requestlogs", require("./routes/requestLogRoutes"));
+
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server is Running now");
 });
