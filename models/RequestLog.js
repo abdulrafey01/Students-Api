@@ -1,24 +1,30 @@
 const mongoose = require("mongoose");
 
 const requestLogSchema = new mongoose.Schema({
-  url: {
+  clientBrowser: {
     type: String,
   },
-  method: {
+  clientOs: {
     type: String,
   },
-  time: {
+  clientIp: {
+    type: String,
+  },
+  clientMac: {
+    type: String,
+  },
+  clientUrl: {
+    type: String,
+  },
+  apiMethod: {
+    type: String,
+  },
+  apiEndPoint: {
+    type: String,
+  },
+  date: {
     type: String,
     default: new Date().toLocaleString(),
-  },
-  browser: {
-    type: String,
-  },
-  os: {
-    type: String,
-  },
-  device: {
-    type: String,
   },
 });
 
