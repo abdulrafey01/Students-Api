@@ -1,18 +1,25 @@
-const express = require("express")
-const { create, fetchAll, fetchOne, remove, update } = require("../controllers/courseController")
-const { courseValidators } = require("../validators/courseValidators")
-const {runValidation} = require("../validators/index")
+const express = require("express");
+const {
+  create,
+  fetchAll,
+  fetchOne,
+  remove,
+  update,
+} = require("../controllers/courseController");
 
+const { uploadMulter } = require("../middlewares/multerMiddleware");
 
-const router = express.Router()
+const router = express.Router();
 
-router.post("/add",courseValidators, runValidation, create)
+router.post("/add", uploadMulter, create);
 
-router.get("/all",fetchAll)
+// router.post("/upload", uploadMulter, uploadImage);
 
-router.get("/fetchone/:id", fetchOne)
+router.get("/all", fetchAll);
 
-router.put("/update/:id", update)
+router.get("/fetchone/:id", fetchOne);
 
-router.delete("/remove/:id", remove)
-module.exports = router
+router.put("/update/:id", update);
+
+router.delete("/remove/:id", remove);
+module.exports = router;
