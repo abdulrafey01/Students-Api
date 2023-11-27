@@ -1,7 +1,7 @@
 const express = require("express");
 const connectToMongoose = require("./config/db");
 const cors = require("cors");
-const requestLogMiddleware = require("./middlewares/requestLogMiddleware");
+// const requestLogMiddleware = require("./middlewares/requestLogMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -9,7 +9,7 @@ app.use(cors());
 
 connectToMongoose();
 
-app.use(requestLogMiddleware(app));
+// app.use(requestLogMiddleware(app));
 
 app.get("/", (req, res) => {
   res.send("Student Api Here");
